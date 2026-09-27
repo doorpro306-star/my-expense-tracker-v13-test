@@ -1,0 +1,63 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover"><meta name="theme-color" content="#111827"><link rel="manifest" href="manifest.webmanifest"><link rel="stylesheet" href="styles.css"><title>My Expenses</title></head>
+<body><header><div><small>PERSONAL EXPENSES</small><h1>My Expenses</h1></div><button id="install">＋</button></header>
+<main>
+<section id="home" class="screen active">
+<h2 id="currentYearLabel">Current Year</h2>
+<div class="stats">
+<div><small>Total Expenses</small><b id="mTotal">$0.00</b></div>
+<div><small>GST/HST</small><b id="mGST">$0.00</b></div>
+<div><small>PST/QST</small><b id="mPST">$0.00</b></div>
+<div><small>Total Tax</small><b id="mTax">$0.00</b></div>
+<div><small>Receipts</small><b id="mCount">0</b></div></div>
+
+<h2 id="previousYearLabel">Previous Year</h2>
+<div class="stats">
+<div><small>Total Expenses</small><b id="pTotal">$0.00</b></div>
+<div><small>GST/HST</small><b id="pGST">$0.00</b></div>
+<div><small>PST/QST</small><b id="pPST">$0.00</b></div>
+<div><small>Total Tax</small><b id="pTax">$0.00</b></div>
+<div><small>Receipts</small><b id="pCount">0</b></div>
+</div>
+
+<button class="primary big" onclick="show('add')">📷 Add / import receipt</button>
+
+<h2>Recent expenses</h2>
+<div id="recent"></div>
+
+<h2>Archived Years</h2>
+<div id="archives">
+<div class="panel">No archived years yet.</div>
+</div></section>
+  <section id="archiveDetail" class="screen">
+  <div class="head">
+    <h2 id="archiveTitle">Archived Year</h2>
+    <button onclick="show('home')">Back</button>
+  </div>
+
+  <div class="stats">
+    <div><small>Total Expenses</small><b id="aTotal">$0.00</b></div>
+    <div><small>GST/HST</small><b id="aGST">$0.00</b></div>
+    <div><small>PST/QST</small><b id="aPST">$0.00</b></div>
+    <div><small>Total Tax</small><b id="aTax">$0.00</b></div>
+    <div><small>Receipts</small><b id="aCount">0</b></div>
+  </div>
+
+  <h2>Receipts</h2>
+  <div id="archiveReceipts"></div>
+</section>
+<section id="add" class="screen"><div class="head"><h2>Add receipt</h2><button onclick="show('home')">Cancel</button></div><div class="grid">
+<label class="source">📷<b>Take photo</b><input id="camera" type="file" accept="image/*" capture="environment"></label>
+<label class="source">🖼️<b>Choose photo</b><input id="photo" type="file" accept="image/*"></label>
+<label class="source">📄<b>Choose PDF</b><input id="pdf" type="file" accept="application/pdf"></label>
+<button class="source" id="drive">☁️<b>Google Drive</b></button><button class="source" id="gmail">✉️<b>Gmail PDFs</b></button></div>
+<div class="panel"><b>Google imports</b><p>Optional. Connect only when you want Gmail or Drive.</p><button id="connect">Connect Google</button> <button id="disconnect">Disconnect</button><p id="gstatus">Not connected</p></div><div id="gmailResults"></div><div id="processing" class="panel hidden">Reading receipt… <span id="progress"></span></div></section>
+<section id="review" class="screen"><div class="head"><h2>Review expense</h2><button onclick="show('home')">Cancel</button></div><form id="form"><label>Supplier<input id="supplier"></label><div class="two"><label>Date<input id="date" type="date"></label><label>Invoice #<input id="invoice"></label></div><label>Category<select id="category"></select></label><div class="three"><label>Subtotal<input id="subtotal" inputmode="decimal"></label><label>GST/HST<input id="gst" inputmode="decimal"></label><label>PST/QST<input id="pst" inputmode="decimal"></label><label>Total<input id="total" inputmode="decimal"></label></div><label>Payment method<input id="payment"></label><label>Notes<textarea id="notes"></textarea></label><details><summary>Extracted text</summary><pre id="ocr"></pre></details><button class="primary big">Save expense</button><button type="button" class="danger" id="delete">Delete</button></form></section>
+<section id="expenses" class="screen"><div class="head"><h2>Expenses</h2><button onclick="show('home')">Back</button></div><input id="search" placeholder="Search expenses"><div id="list"></div></section>
+<section id="reports" class="screen">
+<div class="head"><h2>Reports</h2><button onclick="show('home')">Back</button></div>
+<div class="panel"><label>Report Year<select id="reportYear" onchange="reports()"></select></label></div>
+<div id="report"></div>
+</section>
+<section id="settings" class="screen"><div class="head"><h2>Backup</h2><button onclick="show('home')">Back</button></div><div class="panel"><button id="csv">Export CSV</button><button id="backup">Export JSON backup</button><label class="button">Restore JSON<input id="restore" type="file" accept="application/json"></label></div></section>
+</main><nav><button onclick="show('home')">⌂<small>Home</small></button><button onclick="show('expenses')">▤<small>Expenses</small></button><button onclick="show('reports')">▥<small>Reports</small></button><button onclick="show('settings')">⚙<small>Settings</small></button></nav>
+<script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script><script src="https://apis.google.com/js/api.js"></script><script src="https://accounts.google.com/gsi/client"></script><script src="config.js?v=4"></script><script src="app.js?v=12"></script></body></html>
